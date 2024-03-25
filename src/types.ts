@@ -27,13 +27,14 @@ export interface Episode {
   author: string;
   contentEncoded: string;
   description: string;
-  enclosure: { url: string; type: string } | null;
+  enclosure: { url: string | null; type: string | null } | null;
   guid: string;
   itunesAuthor: string;
   itunesDuration: number;
   itunesEpisode: string;
   itunesEpisodeType: string;
   itunesExplicit: string;
+  itunesImage: string | null;
   itunesSubtitle: string;
   itunesSummary: string;
   itunesTitle: string;

@@ -34,8 +34,8 @@ export interface Episode {
     contentEncoded: string;
     description: string;
     enclosure: {
-        url: string;
-        type: string;
+        url: string | null;
+        type: string | null;
     } | null;
     guid: string;
     itunesAuthor: string;
@@ -43,6 +43,7 @@ export interface Episode {
     itunesEpisode: string;
     itunesEpisodeType: string;
     itunesExplicit: string;
+    itunesImage: string | null;
     itunesSubtitle: string;
     itunesSummary: string;
     itunesTitle: string;

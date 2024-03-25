@@ -40,9 +40,9 @@ export function createPodcast(document: Document, source: string | URL | number)
       url: getText(imageElem, "url"),
     },
     itunesAuthor: getText(documentElement, "itunes:author"),
-    itunesCategory: documentElement.getElementsByTagName("itunes:category")[0]?.getAttribute("text") ?? "",
+    itunesCategory: documentElement.getElementsByTagName("itunes:category")[0]?.getAttribute("text") ?? null,
     itunesExplicit: getText(documentElement, "itunes:explicit"),
-    itunesImage: documentElement.getElementsByTagName("itunes:image")[0]?.getAttribute("href") ?? "",
+    itunesImage: documentElement.getElementsByTagName("itunes:image")[0]?.getAttribute("href") ?? null,
     itunesOwner: {
       email: getText(documentElement, "itunes:email"),
       name: getText(documentElement, "itunes:name"),
@@ -64,14 +64,14 @@ export function createPodcast(document: Document, source: string | URL | number)
  */
 export function createEpisode(item: Element): Episode {
   const enclosureElem = item.getElementsByTagName("enclosure")[0];
-
+  const imageElem = item.getElementsByTagName("itunes:image")[0];
   return {
     author: getText(item, "author"),
     contentEncoded: getText(item, "content:encoded"),
     description: getText(item, "description"),
     enclosure: {
-      url: enclosureElem?.getAttribute("url") ?? "",
-      type: enclosureElem?.getAttribute("type") ?? "",
+      url: enclosureElem?.getAttribute("url") ?? null,
+      type: enclosureElem?.getAttribute("type") ?? null,
     },
     guid: getText(item, "guid"),
     itunesAuthor: getText(item, "itunes:author"),
@@ -79,6 +79,7 @@ export function createEpisode(item: Element): Episode {
     itunesEpisode: getText(item, "itunes:episode"),
     itunesEpisodeType: getText(item, "itunes:episodeType"),
     itunesExplicit: getText(item, "itunes:explicit"),
+    itunesImage: imageElem?.getAttribute("href") ?? null,
     itunesSubtitle: getText(item, "itunes:subtitle"),
     itunesSummary: getText(item, "itunes:summary"),
     itunesTitle: getText(item, "itunes:title"),

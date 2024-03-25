@@ -41,9 +41,9 @@ function createPodcast(document, source) {
             url: getText(imageElem, "url"),
         },
         itunesAuthor: getText(documentElement, "itunes:author"),
-        itunesCategory: (_d = (_c = documentElement.getElementsByTagName("itunes:category")[0]) === null || _c === void 0 ? void 0 : _c.getAttribute("text")) !== null && _d !== void 0 ? _d : "",
+        itunesCategory: (_d = (_c = documentElement.getElementsByTagName("itunes:category")[0]) === null || _c === void 0 ? void 0 : _c.getAttribute("text")) !== null && _d !== void 0 ? _d : null,
         itunesExplicit: getText(documentElement, "itunes:explicit"),
-        itunesImage: (_f = (_e = documentElement.getElementsByTagName("itunes:image")[0]) === null || _e === void 0 ? void 0 : _e.getAttribute("href")) !== null && _f !== void 0 ? _f : "",
+        itunesImage: (_f = (_e = documentElement.getElementsByTagName("itunes:image")[0]) === null || _e === void 0 ? void 0 : _e.getAttribute("href")) !== null && _f !== void 0 ? _f : null,
         itunesOwner: {
             email: getText(documentElement, "itunes:email"),
             name: getText(documentElement, "itunes:name"),
@@ -64,15 +64,16 @@ exports.createPodcast = createPodcast;
  * @returns The created Episode object with parsed values.
  */
 function createEpisode(item) {
-    var _a, _b;
+    var _a, _b, _c;
     var enclosureElem = item.getElementsByTagName("enclosure")[0];
+    var imageElem = item.getElementsByTagName("itunes:image")[0];
     return {
         author: getText(item, "author"),
         contentEncoded: getText(item, "content:encoded"),
         description: getText(item, "description"),
         enclosure: {
-            url: (_a = enclosureElem === null || enclosureElem === void 0 ? void 0 : enclosureElem.getAttribute("url")) !== null && _a !== void 0 ? _a : "",
-            type: (_b = enclosureElem === null || enclosureElem === void 0 ? void 0 : enclosureElem.getAttribute("type")) !== null && _b !== void 0 ? _b : "",
+            url: (_a = enclosureElem === null || enclosureElem === void 0 ? void 0 : enclosureElem.getAttribute("url")) !== null && _a !== void 0 ? _a : null,
+            type: (_b = enclosureElem === null || enclosureElem === void 0 ? void 0 : enclosureElem.getAttribute("type")) !== null && _b !== void 0 ? _b : null,
         },
         guid: getText(item, "guid"),
         itunesAuthor: getText(item, "itunes:author"),
@@ -80,6 +81,7 @@ function createEpisode(item) {
         itunesEpisode: getText(item, "itunes:episode"),
         itunesEpisodeType: getText(item, "itunes:episodeType"),
         itunesExplicit: getText(item, "itunes:explicit"),
+        itunesImage: (_c = imageElem === null || imageElem === void 0 ? void 0 : imageElem.getAttribute("href")) !== null && _c !== void 0 ? _c : null,
         itunesSubtitle: getText(item, "itunes:subtitle"),
         itunesSummary: getText(item, "itunes:summary"),
         itunesTitle: getText(item, "itunes:title"),
